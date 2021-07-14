@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barcode Generator with JavaScript</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 codeContainer">
+			<h3 class="banner text-center">Barcode Generator with JavaScript</h3>
+
+			<div class="pd-15">
+				<div class="form-group">
+					<label>Fill code</label>
+					<input type="text" name="barcodeValue" id="barcodeValue" class="form-control" value="123456" >
+				</div>
+
+				<div class="form-group">
+					<label>Barcode Types</label>
+					<select name="barcodeType" id="barcodeType" class="form-control">
+						<option value="code128">Code 128</option>								
+						<option value="codabar">Codabar</option>							
+						<option value="code39">Code 39</option>															
+						<option value="msi">MSI</option>
+						<option value="pharmacode">Pharmacode</option>								
+					</select> 
+				</div>
+
+				<div class="form-group">
+					<label>Show Text</label>
+					<select name="showText" id="showText" class="form-control" required>
+						<option value="true">Yes</option>
+						<option value="false">No</option>								
+					</select>
+				</div>
+
+				<input type="button" onclick="generateBarcode()" class="btn btn-success form-control" value="Generate">
+
+				<div class="text-center">
+					<svg id="barcode"></svg>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.3/dist/JsBarcode.all.min.js"></script>
+	<script type="text/javascript">
+		function generateBarcode(){
+			var barcodeValue = document.getElementById("barcodeValue").value;
+			var barcodeType = document.getElementById("barcodeType").value;	
+			var showText = document.getElementById("showText").value;			
+			JsBarcode("#barcode", barcodeValue, {
+				format: barcodeType,
+				displayValue: showText,
+				lineColor: "#24292e",
+				width:2,
+				height:40,	
+				fontSize: 20					
+			});		
+		}
+		generateBarcode();
+	</script>
+</body>
+</html>
